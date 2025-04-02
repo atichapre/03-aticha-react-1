@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import About from "./pages/About";
 import Owner from "./pages/Owner";
 import { UserHome } from "./pages/UserHome";
 import { UserAdmin } from "./pages/UserAdmin";
