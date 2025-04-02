@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Home from "./Home";
 
 export const UserAdmin = () => {
   const [members, setMembers] = useState([]);
@@ -11,11 +11,6 @@ export const UserAdmin = () => {
     lastname: "",
     position: "",
   });
-
-  const navigate = useNavigate();
-
-  const handleNavigateUserHome = () => navigate("/user");
-  const handleNavigateAdminHome = () => navigate("/admin");
 
   const getMembers = async () => {
     try {
@@ -41,13 +36,13 @@ export const UserAdmin = () => {
       setIsLoading(true);
       await axios.delete(`https://jsd5-mock-backend.onrender.com/member/${id}`);
       setMembers(members.filter((member) => member.id !== id));
-      window.alert("Member deleted successfully.");
+      alert("Member deleted successfully.");
     } catch (error) {
       console.error(
         "Request Failed:",
         error.response ? error.response.data : error.message
       );
-      window.alert("Failed to delete member. Please try again.");
+      alert("Failed to delete member. Please try again.");
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -56,7 +51,7 @@ export const UserAdmin = () => {
 
   const handleAddMember = async () => {
     if (!newMember.name || !newMember.lastname || !newMember.position) {
-      window.alert("Please fill in all fields.");
+      alert("Please fill in all fields.");
       return;
     }
     try {
@@ -65,7 +60,7 @@ export const UserAdmin = () => {
         newMember
       );
       setMembers([...members, response.data]);
-      setNewMember({ id: "", name: "", lastname: "", position: "" });
+      setNewMember({ name: "", lastname: "", position: "" });
     } catch (error) {
       console.error(
         "Request Failed:",
@@ -80,23 +75,8 @@ export const UserAdmin = () => {
   }, []);
 
   return (
-    <div className="overflow-x-auto">
-      <div className="mb-4 text-center">
-        <h1 className="text-4xl font-bold mb-2">Generation Thailand</h1>
-        <h2 className="text-4xl font-bold mb-10">Home - Admin</h2>
-        <button
-          onClick={handleNavigateUserHome}
-          className="px-4 py-2 mx-2 bg-teal-500 text-white rounded hover:bg-teal-700"
-        >
-          User Home
-        </button>
-        <button
-          onClick={handleNavigateAdminHome}
-          className="px-4 py-2 mx-2 bg-teal-500 text-white rounded hover:bg-teal-700"
-        >
-          Admin Home
-        </button>
-      </div>
+    <>
+      <Home />
 
       <div className="mb-4 p-4 bg-gray-100 rounded-lg">
         <h2 className="text-lg font-semibold mb-2">Add New Member</h2>
@@ -136,7 +116,7 @@ export const UserAdmin = () => {
           Save
         </button>
         <button
-          onClick={() => window.location.reload()}
+          onClick={getMembers}
           className="mt-2 px-4 mx-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
           Update Table
@@ -187,6 +167,6 @@ export const UserAdmin = () => {
           </tbody>
         </table>
       )}
-    </div>
+    </>
   );
 };
