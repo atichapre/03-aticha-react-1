@@ -21,10 +21,7 @@ export const UserAdmin = () => {
       );
       setMembers(response.data);
     } catch (error) {
-      console.error(
-        "Request Failed:",
-        error.response ? error.response.data : error.message
-      );
+      console.error(error);
       setIsError(true);
     } finally {
       setIsLoading(false);
@@ -38,12 +35,9 @@ export const UserAdmin = () => {
       setMembers(members.filter((member) => member.id !== id));
       alert("Member deleted successfully.");
     } catch (error) {
-      console.error(
-        "Request Failed:",
-        error.response ? error.response.data : error.message
-      );
-      alert("Failed to delete member. Please try again.");
+      console.error(error);
       setIsError(true);
+      alert("Failed to delete member.");
     } finally {
       setIsLoading(false);
     }
@@ -51,7 +45,7 @@ export const UserAdmin = () => {
 
   const handleAddMember = async () => {
     if (!newMember.name || !newMember.lastname || !newMember.position) {
-      alert("Please fill in all fields.");
+      alert("Please complete all fields.");
       return;
     }
     try {
@@ -62,11 +56,11 @@ export const UserAdmin = () => {
       setMembers([...members, response.data]);
       setNewMember({ name: "", lastname: "", position: "" });
     } catch (error) {
-      console.error(
-        "Request Failed",
-        error.response ? error.response.data : error.message
-      );
+      console.error(error);
       setIsError(true);
+      alert("Failed to delete member.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -77,7 +71,6 @@ export const UserAdmin = () => {
   return (
     <>
       <Home />
-
       <div className="mb-4 p-4 bg-gray-100 rounded-lg">
         <h2 className="text-lg font-semibold mb-2">Add New Member</h2>
         <div className="grid grid-cols-6 gap-2">
