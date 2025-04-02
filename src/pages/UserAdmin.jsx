@@ -72,7 +72,7 @@ export const UserAdmin = () => {
     <>
       <Home />
       <div className="mb-4 p-4 bg-gray-100 rounded-lg">
-        <h2 className="text-lg font-semibold mb-2">Add New Member</h2>
+        <h2 className="text-lg font-semibold mb-2">Create User Here</h2>
         <div className="grid grid-cols-6 gap-2">
           <input
             type="text"
