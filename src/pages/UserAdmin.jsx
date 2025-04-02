@@ -63,7 +63,7 @@ export const UserAdmin = () => {
       setNewMember({ name: "", lastname: "", position: "" });
     } catch (error) {
       console.error(
-        "Request Failed:",
+        "Request Failed",
         error.response ? error.response.data : error.message
       );
       setIsError(true);

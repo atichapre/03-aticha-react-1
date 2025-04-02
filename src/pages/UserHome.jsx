@@ -18,7 +18,7 @@ export const UserHome = () => {
       setMembers(response.data);
     } catch (error) {
       console.error(
-        "Request Failed:",
+        "Request Failed",
         error.response ? error.response.data : error.message
       );
       setIsError(true);
@@ -51,27 +51,19 @@ export const UserHome = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(members) && members.length > 0 ? (
-              members.map((member) =>
-                member.id ? (
-                  <tr key={member.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-2 border-b">{member.id}</td>
-                    <td className="px-4 py-2 border-b">{member.name}</td>
-                    <td className="px-4 py-2 border-b">{member.lastname}</td>
-                    <td className="px-4 py-2 border-b">{member.position}</td>
-                  </tr>
-                ) : (
-                  <tr>
-                    <td colSpan={4} className="text-center py-4">
-                      Incomplete Data
-                    </td>
-                  </tr>
-                )
-              )
+            {members.length > 0 ? (
+              members.map((member) => (
+                <tr key={member.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-2 border-b">{member.id}</td>
+                  <td className="px-4 py-2 border-b">{member.name}</td>
+                  <td className="px-4 py-2 border-b">{member.lastname}</td>
+                  <td className="px-4 py-2 border-b">{member.position}</td>
+                </tr>
+              ))
             ) : (
               <tr>
                 <td colSpan={4} className="text-center py-4">
-                  No Employees Found
+                  No Members Found
                 </td>
               </tr>
             )}
